@@ -8,22 +8,25 @@ namespace ControleEstoque.Web.Controllers
 {
     public class OperacaoController : Controller
     {
-        // GET: Operacao
+        [Authorize]
         public ActionResult EntradaEstoque()
         {
             return View();
         }
 
+        [Authorize]
         public ActionResult SaídaEstoque()
         {
             return View();
         }
 
+        [Authorize]
         public ActionResult LancPerdaProduto()
         {
             return View();
         }
 
+        [Authorize]
         public ActionResult inventario()
         {
             return View();
