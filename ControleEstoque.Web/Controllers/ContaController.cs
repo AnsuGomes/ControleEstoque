@@ -26,7 +26,7 @@ namespace ControleEstoque.Web.Controllers
                 return View(login);
             }
 
-            var achou = (login.Usuario == "ansu" && login.Senha == "123");
+            var achou = UsuarioModel.ValidarUsuario(login.Usuario, login.Senha);
 
             if (achou)
             {
@@ -42,7 +42,7 @@ namespace ControleEstoque.Web.Controllers
             }
             else
             {
-                ModelState.AddModelError("", "Login inválido.");
+                ModelState.AddModelError("", "Login inválido."); 
             }
 
             return View(login);
