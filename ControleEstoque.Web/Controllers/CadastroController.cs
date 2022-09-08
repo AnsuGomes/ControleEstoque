@@ -55,7 +55,7 @@ namespace ControleEstoque.Web.Controllers
             if (!ModelState.IsValid)
             {
                 resultado = "AVISO!";
-                mensagens = ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage).ToList()
+                mensagens = ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage).ToList();
             }
             else
             {
