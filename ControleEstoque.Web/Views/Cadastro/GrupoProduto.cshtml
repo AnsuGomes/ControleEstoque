@@ -2,6 +2,9 @@
 @{
     ViewBag.Title = "Cadastro de Grupo de Produtos";
 }
+
+<script src="~/Scripts/GrupoProduto/GrupoProduto.js"></script>
+
 <style>
     #grid_cadastro > thead > tr th:nth-child(2) {
         width: 110px;
@@ -28,6 +31,7 @@
         margin-bottom: 20px;
     }
 </style>
+
 <div id="cadastro">
     <section id="cadastro_cabecalho">
         <h1>@ViewBag.Title</h1>
@@ -138,7 +142,7 @@
                 '</tr>';
             return ret;
         }
-
+       
         $(document).on('click', '#btn_incluir', function () {
             abrir_form({ Id: 0, Nome: '', Ativo: true });
         })
