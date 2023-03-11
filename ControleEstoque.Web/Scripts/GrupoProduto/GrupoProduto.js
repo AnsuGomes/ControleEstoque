@@ -1,4 +1,8 @@
-﻿function abrir_form(dados) {
+﻿function add_anti_forgery_token(data) {
+    data.__RequestVerificationToken = $('[name=__RequestVerificationToken]').val();
+    return data;
+}
+function abrir_form(dados) {
     $('#id_cadastro').val(dados.Id);
     $('#txt_nome').val(dados.Nome);
     $('#cbx_ativo').prop('checked', dados.Ativo);
@@ -36,7 +40,7 @@ function criar_linha_grid(dados) {
         '</tr>';
     return ret;
 }
-debugger;
+
 $(document).on('click', '#btn_incluir', function () {
     abrir_form({ Id: 0, Nome: '', Ativo: true });
 })
@@ -45,7 +49,7 @@ $(document).on('click', '#btn_incluir', function () {
             id = btn.closest('tr').attr('data-id'),
             url = '@Url.Action("RecuperarGrupoProduto", "Cadastro")',
             param = { 'id': id };
-        $.post(url, param, function (response) {
+        $.post(url, add_anti_forgery_token(param), function (response) {
             if (response) {
                 abrir_form(response);
             }
@@ -72,7 +76,7 @@ $(document).on('click', '#btn_incluir', function () {
             },
             callback: function (result) {
                 if (result) {
-                    $.post(url, param, function (response) {
+                    $.post(url, add_anti_forgery_token(param), function (response) {
                         if (response) {
                             tr.remove();
                         }
@@ -89,7 +93,7 @@ $(document).on('click', '#btn_incluir', function () {
                 Nome: $('#txt_nome').val(),
                 Ativo: $('#cbx_ativo').prop('checked')
             };
-        $.post(url, param, function (response) {
+        $.post(url, add_anti_forgery_token(param), function (response) {
             if (response.Resultado == "Ok") {
                 if (param.Id == 0) {
                     param.Id = response.IdSalvo;

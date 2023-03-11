@@ -47,7 +47,7 @@ namespace ControleEstoque.Web.Models
 
         public static GrupoProdutoModel RecuperarPeloId(int id)
         {
-            GrupoProdutoModel ret = null;
+            GrupoProdutoModel grupoProdutoModel = null;
 
             using (var conexao = new SqlConnection())
             {
@@ -63,7 +63,7 @@ namespace ControleEstoque.Web.Models
                     var reader = comando.ExecuteReader();
                     if (reader.Read())
                     {
-                        ret = new GrupoProdutoModel
+                        grupoProdutoModel = new GrupoProdutoModel
                         {
                             Id = (int)reader["id"],
                             Nome = (string)reader["nome"],
@@ -73,7 +73,7 @@ namespace ControleEstoque.Web.Models
                 }
             }
 
-            return ret;
+            return grupoProdutoModel;
         }
 
         public static bool ExcluirPeloId(int id)

@@ -126,6 +126,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OperacaoController.cs" />
     <Compile Include="Controllers\RelatorioController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="fonts\Helpers\CriptoHelper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
