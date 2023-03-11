@@ -149,7 +149,6 @@
         $(document).on('click', '#btn_incluir', function () {
             abrir_form({ Id: 0, Nome: '', Login: '', Senha: '' });
         })
-
         .on('click', '.btn-alterar', function () {
             var btn = $(this),
                 id = btn.closest('tr').attr('data-id'),
