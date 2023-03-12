@@ -13,7 +13,7 @@ namespace ControleEstoque.Web.Controllers
         private const string _senhaPadrao = "{$127;$188}";
 
         [Authorize]
-        public ActionResult Usuario()
+        public ActionResult Usuário()
         {
             ViewBag.SenhaPadrao = _senhaPadrao;
             return View(UsuarioModel.RecuperarLista());
@@ -79,7 +79,7 @@ namespace ControleEstoque.Web.Controllers
 
         #endregion
 
-        #region GrupoProduto
+        #region Grupos de produtos
 
         [Authorize]
         public ActionResult GrupoProduto()
