@@ -2,13 +2,6 @@
 @{
     ViewBag.Title = "Cadastro de Grupo de Produtos";
 }
-
-<script src="/Scripts/jquery-3.4.1.js"></script>
-<script src="/Scripts/bootstrap.js"></script>
-<script src="/Scripts/bootbox.min.js"></script>
-<script src="~/Scripts/GrupoProduto/GrupoProduto.js"></script>
-<script src="~/Scripts/"></script>
-
 <style>
     #grid_cadastro > thead > tr th:nth-child(2) {
         width: 110px;
@@ -35,7 +28,6 @@
         margin-bottom: 20px;
     }
 </style>
-
 <div id="cadastro">
     <section id="cadastro_cabecalho">
         <h1>@ViewBag.Title</h1>
@@ -57,21 +49,48 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr data-id="@item.Id">
-                                <td>@item.Nome</td>
-                                <td>@{var ativo = (item.Ativo ? "SIM" : "NÃO");}@ativo</td>
-                                <td>
-                                    <a class="btn btn-primary btn-alterar" role="button"><i class="glyphicon glyphicon-pencil"></i> Alterar</a>
-                                    <a class="btn btn-danger btn-excluir" role="button"><i class="glyphicon glyphicon-trash"></i> Excluir</a>
-                                </td>
-                            </tr>
+                        @{
+                            var linha = 0;
+                            foreach (var item in Model)
+                            {
+                                linha++;
+                                if (linha <= ViewBag.QuantMaxLinhasPorPagina)
+                                {
+                                    <tr data-id="@item.Id">
+                                        <td>@item.Nome</td>
+                                        <td>@{var ativo = (item.Ativo ? "SIM" : "NÃO");}@ativo</td>
+                                        <td>
+                                            <a class="btn btn-primary btn-alterar" role="button"><i class="glyphicon glyphicon-pencil"></i> Alterar</a>
+                                            <a class="btn btn-danger btn-excluir" role="button"><i class="glyphicon glyphicon-trash"></i> Excluir</a>
+                                        </td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
                         }
                     </tbody>
                 </table>
             </div>
         </div>
+        @if (ViewBag.QuantPaginas > 1)
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            @for (int i = 2; i <= ViewBag.QuantPaginas; i++)
+                            {
+                                <li class="page-item"><a class="page-link" href="#">@i</a></li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        }
     </section>
 </div>
 @Html.Hidden("id_cadastro")
@@ -108,7 +127,7 @@
     </fieldset>
 </div>
 @section Scripts{
-        <script>
+    <script>
             function add_anti_forgery_token(data) {
                 data.__RequestVerificationToken = $('[name=__RequestVerificationToken]').val();
                 return data;
@@ -246,5 +265,5 @@
 
                 return '<ul>' + ret + '</ul>';
             }
-        </script>
-    }
+    </script>
+}
