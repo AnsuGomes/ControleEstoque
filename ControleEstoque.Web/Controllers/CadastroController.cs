@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace ControleEstoque.Web.Controllers
@@ -116,13 +117,12 @@ namespace ControleEstoque.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SalvarGrupoProduto(GrupoProdutoModel model)
         {
-            var resultado = "Ok";
+            var resultado = "OK";
             var mensagens = new List<string>();
             var idSalvo = string.Empty;
-
             if (!ModelState.IsValid)
             {
-                resultado = "AVISO!";
+                resultado = "AVISO";
                 mensagens = ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage).ToList();
             }
             else
@@ -136,18 +136,18 @@ namespace ControleEstoque.Web.Controllers
                     }
                     else
                     {
-                        resultado = "ERRO!";
+                        resultado = "ERRO";
                     }
                 }
                 catch (Exception ex)
                 {
-
-                    resultado = "ERRO!";
+                    resultado = "ERRO";
                 }
             }
             return Json(new { Resultado = resultado, Mensagens = mensagens, IdSalvo = idSalvo });
         }
 
+        #endregion
         [Authorize]
         public ActionResult MarcaProduto()
         {
@@ -173,7 +173,7 @@ namespace ControleEstoque.Web.Controllers
         }
 
         [Authorize]
-        public ActionResult País()
+        public ActionResult Pais()
         {
             return View();
         }
@@ -197,11 +197,10 @@ namespace ControleEstoque.Web.Controllers
         }
 
         [Authorize]
-        public ActionResult PerfilUsuário()
+        public ActionResult PerfilUsuario()
         {
             return View();
         }
 
-        #endregion
     }
 }
