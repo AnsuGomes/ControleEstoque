@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ControleEstoque.Web.Models;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 using System.Data;
@@ -14,6 +15,13 @@ namespace ControleEstoque.Web
         public string Nome { get; set; }
 
         public bool Ativo { get; set; }
+
+        public List<UsuarioModel> Usuarios { get; set; }
+
+        public PerfilModel()
+        {
+            this.Usuarios = new List<UsuarioModel>();
+        }
 
         public static int RecuperarQuantidade()
         {
@@ -190,6 +198,38 @@ namespace ControleEstoque.Web
             }
 
             return ret;
+        }
+
+        public void CarregarUsuarios()
+        {
+            this.Usuarios.Clear();
+
+            using (var conexao = new SqlConnection())
+            {
+                conexao.ConnectionString = ConfigurationManager.ConnectionStrings["principal"].ConnectionString;
+                conexao.Open();
+                using (var comando = new SqlCommand())
+                {
+                    comando.Connection = conexao;
+                    comando.CommandText =
+                        "select u.* " +
+                        "from perfil_usuario pu, usuario u " +
+                        "where (pu.id_perfil = @id_perfil) and (pu.id_usuario = u.id)";
+
+                    comando.Parameters.Add("@id_perfil", SqlDbType.Int).Value = this.Id;
+
+                    var reader = comando.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        this.Usuarios.Add(new UsuarioModel
+                        {
+                            Id = (int)reader["id"],
+                            Nome = (string)reader["nome"],
+                            Login = (string)reader["login"]
+                        });
+                    }
+                }
+            }
         }
     }
 }
