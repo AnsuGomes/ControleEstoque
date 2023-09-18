@@ -1,18 +1,17 @@
-@model List<ControleEstoque.Web.Models.UnidadeMedidaModel>
+@model List<ControleEstoque.Web.Models.LocalArmazenamentoModel>
 @{
     Layout = "~/Views/Shared/_Cadastro.cshtml";
-    ViewBag.Title = "Unidade de Medida";
+    ViewBag.Title = "Locais de Armazenamento";
     ViewBag.Lista = Model;
 }
 
 @section Styles {
     <link href="~/Content/bootstrap-select.css" rel="stylesheet" />
-    <link href="~/Content/Cadastro/UnidadeMedida.css" rel="stylesheet" />
+    <link href="~/Content/Cadastro/LocalArmazenamento.css" rel="stylesheet" />
 }
 
 @section TituloGrid {
     <th>Nome</th>
-    <th>Sigla</th>
     <th>Ativo</th>
     <th>Ação</th>
 }
@@ -29,7 +28,6 @@
 
                 <tr data-id="@item.Id">
                     <td>@item.Nome</td>
-                    <td>@item.Sigla</td>
                     <td>@ativo</td>
                     <td>
                         <a class="btn btn-primary btn-alterar" role="button"><i class="glyphicon glyphicon-pencil"></i> Alterar</a>
@@ -49,19 +47,13 @@
     <div class="row">
         <div class="form-group">
             @Html.Label("txt_nome", "Nome", new { @class = "col-md-3 control-label" })
-            <div class="col-md-9">
+            <div class="col-md-8">
                 @Html.TextBox("txt_nome", null, new { @class = "form-control" })
             </div>
         </div>
         <div class="form-group">
-            @Html.Label("txt_sigla", "Sigla", new { @class = "col-md-3 control-label" })
-            <div class="col-md-9">
-                @Html.TextBox("txt_sigla", null, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group">
             @Html.Label("cbx_ativo", "Ativo", new { @class = "col-md-3 control-label" })
-            <div class="col-md-9">
+            <div class="col-md-8">
                 @Html.CheckBox("cbx_ativo")
             </div>
         </div>
@@ -72,11 +64,11 @@
     <script src="~/Scripts/bootstrap-select.js"></script>
     <script>
         var tituloPagina = '@ViewBag.Title';
-        var url_excluir = '@Url.Action("ExcluirUnidadeMedida", "CadUnidadeMedida")';
-        var url_confirmar = '@Url.Action("SalvarUnidadeMedida", "CadUnidadeMedida")';
-        var url_page_click = '@Url.Action("UnidadeMedidaPagina", "CadUnidadeMedida")';
-        var url_tam_pag_change = '@Url.Action("UnidadeMedidaPagina", "CadUnidadeMedida")';
-        var url_alterar = '@Url.Action("RecuperarUnidadeMedida", "CadUnidadeMedida")';
+        var url_excluir = '@Url.Action("ExcluirLocalArmazenamento", "CadLocalArmazenamento")';
+        var url_confirmar = '@Url.Action("SalvarLocalArmazenamento", "CadLocalArmazenamento")';
+        var url_page_click = '@Url.Action("LocalArmazenamentoPagina", "CadLocalArmazenamento")';
+        var url_tam_pag_change = '@Url.Action("LocalArmazenamentoPagina", "CadLocalArmazenamento")';
+        var url_alterar = '@Url.Action("RecuperarLocalArmazenamento", "CadLocalArmazenamento")';
     </script>
-    <script src="~/Scripts/Cadastro/UnidadeMedida.js"></script>
+    <script src="~/Scripts/Cadastro/LocalArmazenamento.js"></script>
 }
